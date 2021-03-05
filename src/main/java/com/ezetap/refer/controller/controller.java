@@ -28,7 +28,7 @@ public class controller {
         String referralcode = "";
         for (int i = 0; i < size; i++) {
             if (id.equals(userList.get(i).getId().toString())) {
-                referralcode = userList.get(i).getMerchant_name() + id;
+                referralcode = userList.get(i).getReferralCode();
                 return referralcode;
             }
         }
@@ -42,7 +42,7 @@ public class controller {
         boolean status = false;
         for (int i = 0; i < size; i++) {
             if (id.equals(scratchList.get(i).getId().toString())) {
-                return scratchList.get(i).isStatus();
+                return scratchList.get(i).getScratched();
             }
         }
         return status;
