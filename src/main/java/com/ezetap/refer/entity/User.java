@@ -13,7 +13,7 @@ public class User {
     @Id
     Integer Id;
 
-    String referalCode;
+    String referralCode;
     Boolean applied;
 
     @OneToMany
@@ -23,9 +23,9 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String referalCode, Boolean applied, List<Scratch> scratchCards) {
+    public User(Integer id, String referralCode, Boolean applied, List<Scratch> scratchCards) {
         Id = id;
-        this.referalCode = referalCode;
+        this.referralCode = referralCode;
         this.applied = applied;
         this.scratchCards = scratchCards;
     }
@@ -38,12 +38,12 @@ public class User {
         Id = id;
     }
 
-    public String getReferalCode() {
-        return referalCode;
+    public String getReferralCode() {
+        return referralCode;
     }
 
-    public void setReferalCode(String referalCode) {
-        this.referalCode = referalCode;
+    public void setReferralCode(String referralCode) {
+        this.referralCode = referralCode;
     }
 
     public Boolean getApplied() {
@@ -67,19 +67,19 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getReferalCode(), user.getReferalCode()) && Objects.equals(getApplied(), user.getApplied()) && Objects.equals(getScratchCards(), user.getScratchCards());
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getReferralCode(), user.getReferralCode()) && Objects.equals(getApplied(), user.getApplied()) && Objects.equals(getScratchCards(), user.getScratchCards());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getReferalCode(), getApplied(), getScratchCards());
+        return Objects.hash(getId(), getReferralCode(), getApplied(), getScratchCards());
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "Id=" + Id +
-                ", referalCode='" + referalCode + '\'' +
+                ", referalCode='" + referralCode + '\'' +
                 ", applied=" + applied +
                 ", scratchCards=" + scratchCards +
                 '}';
