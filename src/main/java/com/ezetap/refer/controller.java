@@ -1,30 +1,38 @@
-package com.ezetap.refer.controller;
-import com.ezetap.refer.entity.*;
+package com.ezetap.refer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import  java.util.*;
+
 @RestController
 public class controller {
-    @Autowired
-    userRepository repo;
-    List<User> userList = repo.findAll();
 
-    scratchRepository repos;
-    List<Scratch> scratchList = repos.findAll();
+    @Autowired
+    private static userRepositoryImpl repo;
+
+
+
+
+    @Autowired
+    private static scratchRepositoryImpl repos;
+
+
 
     @GetMapping("/home")
     public String home() {
-        return "Hello World";
+
+
+        return "sf";
     }
 
     @PostMapping("/getmyreferral")
     public String getReferral(@RequestBody String id) {
+        List<User> userList = repo.findAll();
         int size = repo.findAll().size();
+
         String referralcode = "";
         for (int i = 0; i < size; i++) {
             if (id.equals(userList.get(i).getId().toString())) {
@@ -37,6 +45,7 @@ public class controller {
 
     @PostMapping("applyreferral")
     public boolean applyReferral(@RequestBody String data){
+        List<User> userList = repo.findAll();
         String id="";
         User user=new User();
         int size=repo.findAll().size();
@@ -58,6 +67,7 @@ public class controller {
 
     @PostMapping("/fetch")
     public List<Scratch> fetch(@RequestBody String id){
+        List<User> userList = repo.findAll();
         int size = repo.findAll().size();
         String referralcode = "";
         for (int i = 0; i < size; i++) {
@@ -71,6 +81,7 @@ public class controller {
 
     @PostMapping("/Updatereward")
     public boolean updateReward(@RequestBody String id) {
+        List<Scratch> scratchList = repos.findAll();
         int size = repos.findAll().size();
         boolean status = false;
         for (int i = 0; i < size; i++) {

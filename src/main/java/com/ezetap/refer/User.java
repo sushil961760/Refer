@@ -1,17 +1,16 @@
-package com.ezetap.refer.entity;
+package com.ezetap.refer;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="user")
 public class User {
 
     @Id
-    Integer Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
 
     String referralCode;
     Boolean applied;
@@ -24,18 +23,18 @@ public class User {
     }
 
     public User(Integer id, String referralCode, Boolean applied, List<Scratch> scratchCards) {
-        Id = id;
+        this.id = id;
         this.referralCode = referralCode;
         this.applied = applied;
         this.scratchCards = scratchCards;
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getReferralCode() {
@@ -78,7 +77,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", referalCode='" + referralCode + '\'' +
                 ", applied=" + applied +
                 ", scratchCards=" + scratchCards +

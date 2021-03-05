@@ -1,4 +1,4 @@
-package com.ezetap.refer.entity;
+package com.ezetap.refer;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Scratch {
 
     @Id
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer Id;
     Boolean isScratched;
     Integer amount;
