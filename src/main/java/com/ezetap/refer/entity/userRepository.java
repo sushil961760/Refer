@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import java.util.*;
 @Repository
-public interface userRepository extends CrudRepository<user,Integer> {
+public interface userRepository extends CrudRepository<User,Integer> {
     @Override
-    List<user> findAll();
+    List<User> findAll();
 }

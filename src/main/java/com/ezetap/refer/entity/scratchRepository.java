@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 @Repository
-public interface scratchRepository extends CrudRepository<scratch,Integer> {
+public interface scratchRepository extends CrudRepository<Scratch,Integer> {
     @Override
-    List<scratch> findAll();
+    List<Scratch> findAll();
 }
