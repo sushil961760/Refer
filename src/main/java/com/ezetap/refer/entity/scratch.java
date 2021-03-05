@@ -10,6 +10,7 @@ public class scratch {
     @Id
     Integer Id;
 
+
     public scratch(Integer id) {
         Id = id;
     }
