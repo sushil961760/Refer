@@ -22,8 +22,7 @@ public class Scratch {
     public Scratch() {
     }
 
-    public Scratch(Integer id, Boolean isScratched, Integer amount, String createdTS, String transaction_ID, User user) {
-        Id = id;
+    public Scratch( Boolean isScratched, Integer amount, String createdTS, String transaction_ID, User user) {
         this.isScratched = isScratched;
         this.amount = amount;
         this.createdTS = createdTS;
