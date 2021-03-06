@@ -8,11 +8,19 @@ import java.util.Objects;
 public class Scratch {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Id")
     Integer Id;
+
+    @Column(name="isScratched")
     Boolean isScratched;
+
+    @Column(name="amount")
     Integer amount;
+
+    @Column(name="createdTS")
     String createdTS;
+
+    @Column(name="transaction_ID")
     String transaction_ID;
 
     @ManyToOne

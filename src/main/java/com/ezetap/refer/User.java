@@ -1,6 +1,7 @@
 package com.ezetap.refer;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,15 +10,21 @@ import java.util.Objects;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Id")
     Integer id;
 
+    @Column(name="referralCode")
     String referralCode;
+
+    @Column(name="applied")
     Boolean applied;
+
+    @Column(name="mobile_number")
+    String mobile_number;
 
     @OneToMany
     @JoinColumn(name = "user")
-    List<Scratch> scratchCards;
+    List<Scratch> scratchCards=new ArrayList<>();
 
     public User() {
     }
