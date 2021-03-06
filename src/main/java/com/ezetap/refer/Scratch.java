@@ -38,13 +38,13 @@ public class Scratch {
     public Scratch() {
     }
 
-    public Scratch(Integer id, Boolean isScratched, Integer amount, String createdTS, String transaction_ID,String user) {
-        Id = id;
+    public Scratch(Boolean isScratched, Integer amount, String createdTS, String transaction_ID,String userId) {
+
         this.isScratched = isScratched;
         this.amount = amount;
         this.createdTS = createdTS;
         this.transaction_ID = transaction_ID;
-        this.userId = user;
+        this.userId = userId;
     }
 
     public Scratch(boolean b, int random, String yes, String random1, User u2) {
