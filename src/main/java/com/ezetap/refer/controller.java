@@ -56,8 +56,10 @@ public class controller {
         }
         Random rand=new Random();
         int random=rand.nextInt(1000);
-        Scratch card=new Scratch(true,random,"Yes","123",user);
+        String random1=Integer.toString(rand.nextInt());
+        Scratch card=new Scratch(true,random,"Yes",random1,user);
         user.scratchCards.add(card);
+        repo.save(user);
         return true;
     }
 

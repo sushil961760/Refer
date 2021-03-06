@@ -11,4 +11,5 @@ public interface userRepository extends JpaRepository<User,Integer> {
     @Override
     List<User> findAll();
 
+
 }
