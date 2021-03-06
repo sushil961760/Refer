@@ -9,7 +9,6 @@ import java.util.Optional;
 public class Scratch {
 
     @Id
-    @Column(name="Id")
     @GeneratedValue(strategy=GenerationType.AUTO)
     Integer Id;
 
@@ -25,20 +24,27 @@ public class Scratch {
     @Column(name="transaction_ID")
     String transaction_ID;
 
-    @ManyToOne
-    @JoinColumn(name = "user")
-    User user;
+    @Column(name = "user_id")
+    String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public Scratch() {
     }
 
-    public Scratch(Integer id, Boolean isScratched, Integer amount, String createdTS, String transaction_ID, User user) {
+    public Scratch(Integer id, Boolean isScratched, Integer amount, String createdTS, String transaction_ID,String user) {
         Id = id;
         this.isScratched = isScratched;
         this.amount = amount;
         this.createdTS = createdTS;
         this.transaction_ID = transaction_ID;
-        this.user = user;
+        this.userId = user;
     }
 
     public Scratch(boolean b, int random, String yes, String random1, User u2) {
@@ -85,25 +91,19 @@ public class Scratch {
         this.transaction_ID = transaction_ID;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Scratch)) return false;
         Scratch scratch = (Scratch) o;
-        return getId().equals(scratch.getId()) && Objects.equals(isScratched, scratch.isScratched) && Objects.equals(getAmount(), scratch.getAmount()) && Objects.equals(getCreatedTS(), scratch.getCreatedTS()) && Objects.equals(getTransaction_ID(), scratch.getTransaction_ID()) && Objects.equals(getUser(), scratch.getUser());
+        return getId().equals(scratch.getId()) && Objects.equals(isScratched, scratch.isScratched) && Objects.equals(getAmount(), scratch.getAmount()) && Objects.equals(getCreatedTS(), scratch.getCreatedTS()) && Objects.equals(getTransaction_ID(), scratch.getTransaction_ID()) && Objects.equals(getUserId(), scratch.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), isScratched, getAmount(), getCreatedTS(), getTransaction_ID(), getUser());
+        return Objects.hash(getId(), isScratched, getAmount(), getCreatedTS(), getTransaction_ID(), getUserId());
     }
 
     @Override
@@ -114,7 +114,7 @@ public class Scratch {
                 ", amount=" + amount +
                 ", createdTS='" + createdTS + '\'' +
                 ", transaction_ID='" + transaction_ID + '\'' +
-                ", user=" + user +
+                ", user=" + userId +
                 '}';
     }
 }

@@ -1,8 +1,6 @@
 package com.ezetap.refer;
 
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,18 +18,21 @@ public class controller {
 
     @PostMapping("/getmyreferral")
     public String getReferral(@RequestBody Read id) {
-        Optional<User> user=repo.findById(id.getId());
-        User user1=user.get();
-        return user1.getReferralCode();
+        User user=repo.findByMobileNumber(id.getId());
 
+        return user.getReferralCode();
     }
 
     @PostMapping("applyreferral")
-    public boolean applyReferral(@RequestBody Apply data){
-        Optional<User> u1=repo.findById(data.getId());
+    public Response applyReferral(@RequestBody Apply data){
+        Response resp=new Response();
+        User u3=repo.findByMobileNumber(data.getMobileNumber());
         User u2=repo.findByReferralCode(data.getReferral());
-        User u3=u1.get();
-        if(u3.getApplied()){return false;}
+
+        if(u3.getApplied()){
+            resp.setResponse(false);
+            return resp;
+        }
         Random rand=new Random();
         int random11=rand.nextInt(1000);
         int random12=rand.nextInt(1000);
@@ -39,26 +40,26 @@ public class controller {
         String random2=Integer.toString(rand.nextInt());
         Scratch card1=new Scratch(false,random11,"Yes",random1,u2);
         Scratch card2=new Scratch(false,random12,"Yes",random2,u3);
-
         repos.save(card1);
         repos.save(card2);
-        return true;
+        resp.setResponse(true);
+        return resp;
     }
 
     @PostMapping("/fetch")
     public List<Scratch> fetch(@RequestBody Read id){
-        Optional<User> user1=repo.findById(id.getId());
-        User user=user1.get();
-        return user.getScratchCards();
-
+        User user1=repo.findByMobileNumber(id.getId());
+        return user1.getScratchCards();
     }
 
     @PostMapping("/Updatereward")
-    public boolean updateReward(@RequestBody Read id) {
+    public Response updateReward(@RequestBody Reader id) {
         Optional<Scratch> scratch=repos.findById(id.getId());
         Scratch scratch1=scratch.get();
         scratch1.setScratched(true);
-        return scratch1.getScratched();
+        Response resp=new Response();
+        resp.setResponse(true);
+        return resp;
     }
 
 }

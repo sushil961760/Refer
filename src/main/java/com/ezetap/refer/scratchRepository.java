@@ -9,4 +9,6 @@ import java.util.List;
 public interface scratchRepository extends JpaRepository<Scratch,Integer> {
     @Override
     List<Scratch> findAll();
+
+
 }

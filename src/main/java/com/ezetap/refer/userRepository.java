@@ -2,7 +2,6 @@ package com.ezetap.refer;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import java.util.*;
 
@@ -13,4 +12,6 @@ public interface userRepository extends JpaRepository<User,Integer> {
 
 
     User findByReferralCode(String referral);
+
+    User findByMobileNumber(String mobileNumber);
 }

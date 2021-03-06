@@ -2,7 +2,7 @@ package com.ezetap.refer;
 
 public class Apply {
     String referral;
-    Integer id;
+    String mobileNumber;
 
     public String getReferral() {
         return referral;
@@ -12,11 +12,11 @@ public class Apply {
         this.referral = referral;
     }
 
-    public Integer getId() {
-        return id;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 }
