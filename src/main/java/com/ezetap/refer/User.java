@@ -1,7 +1,6 @@
 package com.ezetap.refer;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +10,7 @@ public class User {
 
     @Id
     @Column(name="Id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     Integer id;
 
     @Column(name="referralCode")
@@ -20,19 +20,20 @@ public class User {
     Boolean applied;
 
     @Column(name="mobile_number")
-    String mobile_number;
+    String mobileNumber;
 
     @OneToMany
     @JoinColumn(name = "user")
-    List<Scratch> scratchCards=new ArrayList<>();
+    List<Scratch> scratchCards;
 
     public User() {
     }
 
-    public User(Integer id, String referralCode, Boolean applied, List<Scratch> scratchCards) {
+    public User(Integer id, String referralCode, Boolean applied, String mobileNumber, List<Scratch> scratchCards) {
         this.id = id;
         this.referralCode = referralCode;
         this.applied = applied;
+        this.mobileNumber = mobileNumber;
         this.scratchCards = scratchCards;
     }
 
@@ -60,6 +61,14 @@ public class User {
         this.applied = applied;
     }
 
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
     public List<Scratch> getScratchCards() {
         return scratchCards;
     }
@@ -73,20 +82,21 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getReferralCode(), user.getReferralCode()) && Objects.equals(getApplied(), user.getApplied()) && Objects.equals(getScratchCards(), user.getScratchCards());
+        return getId().equals(user.getId()) && Objects.equals(getReferralCode(), user.getReferralCode()) && Objects.equals(getApplied(), user.getApplied()) && getMobileNumber().equals(user.getMobileNumber()) && Objects.equals(getScratchCards(), user.getScratchCards());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getReferralCode(), getApplied(), getScratchCards());
+        return Objects.hash(getId(), getReferralCode(), getApplied(), getMobileNumber(), getScratchCards());
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + id +
-                ", referalCode='" + referralCode + '\'' +
+                "id=" + id +
+                ", referralCode='" + referralCode + '\'' +
                 ", applied=" + applied +
+                ", mobile_number='" + mobileNumber + '\'' +
                 ", scratchCards=" + scratchCards +
                 '}';
     }

@@ -17,83 +17,48 @@ public class controller {
     @Autowired
     private scratchRepository repos;
 
-    @GetMapping("/home")
-    public String home() {
-        return "sf";
-    }
 
     @PostMapping("/getmyreferral")
     public String getReferral(@RequestBody Read id) {
-        Read reader=id;
-        List<User> userList = repo.findAll();
-        int size = repo.findAll().size();
-        System.out.println(size);
-        String referralcode = "";
-        for (int i = 0; i < size; i++) {
-            if (reader.getId()==userList.get(i).getId()) {
-                referralcode = userList.get(i).getReferralCode();
-                return referralcode;
-            }
-        }
-        return referralcode;
+        Optional<User> user=repo.findById(id.getId());
+        User user1=user.get();
+        return user1.getReferralCode();
+
     }
 
     @PostMapping("applyreferral")
     public boolean applyReferral(@RequestBody Apply data){
-        List<User> userList = repo.findAll();
-        String id="";
-        User user=new User();
-        int size=repo.findAll().size();
-        for(int i=0;i<size;i++){
-            if(data.getId()==repo.findAll().get(i).getId()&&userList.get(i).getApplied()){
-                return false;
-            }
-            if(data.getId()==repo.findAll().get(i).getId()&&!userList.get(i).getApplied()){
-                userList.get(i).setApplied(true);
-                user=repo.findAll().get(i);
-                break;
-            }
-        }
+        Optional<User> u1=repo.findById(data.getId());
+        User u2=repo.findByReferralCode(data.getReferral());
+        User u3=u1.get();
+        if(u3.getApplied()){return false;}
         Random rand=new Random();
-        int random=rand.nextInt(1000);
+        int random11=rand.nextInt(1000);
+        int random12=rand.nextInt(1000);
         String random1=Integer.toString(rand.nextInt());
-        Scratch card=new Scratch(true,random,"Yes",random1,user);
-        user.scratchCards.add(card);
-        repo.save(user);
+        String random2=Integer.toString(rand.nextInt());
+        Scratch card1=new Scratch(false,random11,"Yes",random1,u2);
+        Scratch card2=new Scratch(false,random12,"Yes",random2,u3);
+
+        repos.save(card1);
+        repos.save(card2);
         return true;
     }
 
     @PostMapping("/fetch")
     public List<Scratch> fetch(@RequestBody Read id){
-        Read reader=id;
-        List<User> userList = repo.findAll();
-        int size = repo.findAll().size();
-        String referralcode = "";
-        for (int i = 0; i < size; i++) {
-            if (reader.getId()==userList.get(i).getId()) {
-                return userList.get(i).getScratchCards();
-            }
-        }
-        List<Scratch> cards=new ArrayList<>();
-        return cards;
+        Optional<User> user1=repo.findById(id.getId());
+        User user=user1.get();
+        return user.getScratchCards();
+
     }
 
     @PostMapping("/Updatereward")
     public boolean updateReward(@RequestBody Read id) {
-        Read reader=id;
-        System.out.println(reader.getId());
-        List<Scratch> scratchList = repos.findAll();
-        int size = repos.findAll().size();
-        System.out.println(size);
-        boolean status = false;
-        for (int i = 0; i < size; i++) {
-            System.out.println(scratchList.get(i).getId());
-            if (reader.getId()==scratchList.get(i).getId()) {
-                System.out.println("inside");
-                return scratchList.get(i).getScratched();
-            }
-        }
-        return status;
+        Optional<Scratch> scratch=repos.findById(id.getId());
+        Scratch scratch1=scratch.get();
+        scratch1.setScratched(true);
+        return scratch1.getScratched();
     }
 
 }

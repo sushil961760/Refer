@@ -2,6 +2,7 @@ package com.ezetap.refer;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @Table(name="scratch")
@@ -9,6 +10,7 @@ public class Scratch {
 
     @Id
     @Column(name="Id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     Integer Id;
 
     @Column(name="isScratched")
@@ -30,13 +32,18 @@ public class Scratch {
     public Scratch() {
     }
 
-    public Scratch( Boolean isScratched, Integer amount, String createdTS, String transaction_ID, User user) {
+    public Scratch(Integer id, Boolean isScratched, Integer amount, String createdTS, String transaction_ID, User user) {
+        Id = id;
         this.isScratched = isScratched;
         this.amount = amount;
         this.createdTS = createdTS;
         this.transaction_ID = transaction_ID;
         this.user = user;
     }
+
+    public Scratch(boolean b, int random, String yes, String random1, User u2) {
+    }
+
 
     public Integer getId() {
         return Id;
